@@ -31,6 +31,41 @@
                     <input type="submit" value="Submit" class="form-control">
                 </div>
             </form>
+{{-- Product name, Quantity in stock, Price per item, Datetime submitted, Total value number --}}
+            <div class="table-responsive">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Product name</th>
+                            <th>Quantity in stock</th>
+                            <th>Price per item</th>
+                            <th>Datetime submitted</th>
+                            <th>Total value number</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($products as $product)
+                            <tr>
+                                <td>{{ $product->name }}</td>
+                                <td>{{ $product->quantity }}</td>
+                                <td>{{ $product->price_per_item }}</td>
+                                <td>{{ $product->created_at }}</td>
+                                <td>{{ $product->quantity * $product->price_per_item }}</td>
+                            </tr>
+                        @endforeach
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td>
+                                <label>Total:</label>
+                                {{ $products->sum(function ($product) { return $product->quantity * $product->price_per_item; }) }}
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
 
         </div>
     </body>

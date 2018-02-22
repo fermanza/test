@@ -15,7 +15,9 @@ class ProductsController extends Controller
      */
     public function index()
     {
-        return view('welcome');
+        $products = Product::all();
+
+        return view('welcome', compact('products'));
     }
 
     /**
@@ -52,6 +54,8 @@ class ProductsController extends Controller
         $product->price_per_item = $request->price_per_item;
         $product->file_path = $file_path;
         $product->save();
+
+        return back();
     }
 
     /**
